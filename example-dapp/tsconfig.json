@@ -1,0 +1,65 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "jsx": "react",
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "downlevelIteration": true,
+    "importHelpers": true,
+    "removeComments": false,
+    "esModuleInterop": true,
+
+    // "declaration": true,
+    // "declarationMap": true,
+
+    "strictNullChecks": true,
+    "noImplicitUseStrict": true,
+    "noImplicitAny": false,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedParameters": false,
+    "noErrorTruncation": true,
+
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": false,
+    "checkJs": false,
+
+    "baseUrl": "./",
+    "rootDir": "./src",
+    // "outDir": "./build",
+
+    "lib": [
+      "dom",
+      "es2015"
+    ],
+
+    "plugins": [
+      { "name": "typescript-styled-plugin" }
+    ],
+
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
+
+    "paths": {
+      "~/*": ["src/*"]
+    }
+  },
+
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ],
+
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
+
+  "references": [
+  ]
+}

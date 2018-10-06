@@ -1,0 +1,85 @@
+{
+  "name": "@webwallet/example-dapp",
+  "version": "0.1.0",
+  "license": "MIT",
+  "scripts": {
+    "start": "yarn dev",
+    "dev": "webpack-dev-server --mode development --progress --color --config config/webpack/webpack.config.dev.js",
+    "dist": "yarn dist:clean && webpack --verbose --mode production --color --config config/webpack/webpack.config.dist.js",
+    "dist:clean": "rm -rf ./dist",
+    "dist:stats": "serve -l 5555 ./dist/.stats",
+    "lint": "tslint -c tslint.json src/**/*.ts src/**/*.tsx",
+    "lint:fix": "tslint -c tslint.json --fix 'src/**/*.ts{,x}'",
+    "test:watch": "jest --watchAll",
+    "test": "jest --ci --runInBand"
+  },
+  "dependencies": {
+    "core-js": "^2.5.3",
+    "ethers": "~4.0.3",
+    "global": "^4.3.2",
+    "history": "^4.7.2",
+    "lodash": "^4.17.11",
+    "mobx": "4.4.2",
+    "mobx-little-router": "1.8.2",
+    "mobx-little-router-react": "1.8.2",
+    "mobx-react": "5.2.8",
+    "polished": "^2.2.0",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-helmet": "^5.2.0",
+    "styled-reset": "^1.5.1",
+    "subdivision-styled-components": "^0.2.3",
+    "whatwg-fetch": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/classnames": "^2.2.6",
+    "@types/jest": "^23.3.2",
+    "@types/react": "16.4.15",
+    "@types/react-dom": "^16.0.8",
+    "@types/react-hot-loader": "^4.1.0",
+    "copy-webpack-plugin": "^4.5.2",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "file-loader": "^2.0.0",
+    "fork-ts-checker-webpack-plugin": "^0.4.8",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^23.6.0",
+    "node-fetch": "2.2.0",
+    "prettier": "^1.14.3",
+    "react-hot-loader": "^4.3.11",
+    "serve": "^10.0.2",
+    "source-map-loader": "^0.2.4",
+    "styled-components": "^3.4.9",
+    "styled-map": "^3.0.0",
+    "terser-webpack-plugin": "^1.1.0",
+    "ts-jest": "23.10.3",
+    "ts-loader": "^5.2.1",
+    "tsconfig-paths-webpack-plugin": "^3.2.0",
+    "tslint": "^5.8.0",
+    "tslint-react": "^3.3.3",
+    "typescript": "3.1.1",
+    "typescript-styled-plugin": "^0.11.0",
+    "url-loader": "^1.1.0",
+    "webpack": "^4.20.2",
+    "webpack-assets-by-type-plugin": "^0.1.0",
+    "webpack-bundle-analyzer": "^3.0.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.9"
+  },
+  "jest": {
+    "setupFiles": [],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/config/tests/fileMock.js",
+      "\\.(css|scss)$": "<rootDir>/config/tests/styleMock.js"
+    }
+  }
+}
