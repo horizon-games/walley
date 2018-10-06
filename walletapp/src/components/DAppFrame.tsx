@@ -8,12 +8,18 @@ export interface IDAppFrameProps {
 
 @observer
 export default class DAppFrame extends React.Component<IDAppFrameProps, {}> {
+  iframeRef: HTMLIFrameElement
+
+  componentDidMount() {
+    console.log('===>', this.iframeRef)
+  }
+
   render() {
     const { appURL } = this.props
 
     return (
       <Container>
-        <iframe src={appURL} />
+        <iframe ref={ref => this.iframeRef = ref!} src={appURL} />
       </Container>
     )
   }
