@@ -11,7 +11,11 @@ export default class DAppFrame extends React.Component<IDAppFrameProps, {}> {
   iframeRef: HTMLIFrameElement
 
   componentDidMount() {
-    console.log('===>', this.iframeRef)
+    this.iframeRef.addEventListener('load', (event: UIEvent) => {
+      if (this.iframeRef.contentWindow) {
+        this.iframeRef.contentWindow!.postMessage('start web wallet', this.props.appURL)
+      }
+    })
   }
 
   render() {
