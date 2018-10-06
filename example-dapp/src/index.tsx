@@ -1,3 +1,4 @@
+import '@webwallet/provider'
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import * as mobx from 'mobx'
