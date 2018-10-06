@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
+
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "downlevelIteration": true,
+    "importHelpers": true,
+    "removeComments": false,
+    "strictNullChecks": true,
+    "noImplicitUseStrict": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": false,
+    "checkJs": false,
+
+    "baseUrl": "./",
+    "rootDir": "./src",
+    "outDir": "./dist",
+
+    "lib": ["dom", "es2017"]
+  },
+
+  "include": ["src/**/*.ts"],
+
+  "exclude": ["node_modules", "dist"]
+}

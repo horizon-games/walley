@@ -1,0 +1,42 @@
+{
+  "name": "@webwallet/provider",
+  "version": "0.1.0",
+  "description": "Eth Web Wallet",
+  "repository": "https://github.com/horizon-games/webwallet",
+  "license": "MIT",
+  "keywords": [
+    "ethereum",
+    "horizongames"
+  ],
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "bootstrap": "rm -rf ./node_modules && rm -rf yarn.lock && yarn install",
+    "dist": "rm -rf ./dist && tsc --build .",
+    "build:watch": "tsc --build --watch .",
+    "lint": "yarn run lint:tslint",
+    "lint:fix": "yarn run lint:fixtslint && yarn run lint:fixprettier",
+    "lint:tslint": "tslint -c ./tslint.json $(find src -type f -name *.ts)",
+    "lint:fixtslint": "tslint -c ./tslint.json --fix $(find src -type f -name *.ts)",
+    "test:watch": "jest --watchAll false",
+    "test:watch:verbose": "jest --watchAll --verbose false",
+    "test": "jest --ci --runInBand",
+    "coverage": "jest --coverage"
+  },
+  "dependencies": {
+    "ethers": "~4.0.3"
+  },
+  "devDependencies": {
+    "@types/jest": "^23.3.2",
+    "jest": "^23.6.0",
+    "ts-jest": "23.10.3",
+    "tslint": "^5.8.0",
+    "typescript": "3.1.1"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testMatch": null,
+    "testRegex": "src/__tests__/(?!.*\\.helper\\.ts$).*\\.ts$",
+    "collectCoverageFrom": ["src/**/*.ts", "!src/__tests__/**"]
+  }
+}
