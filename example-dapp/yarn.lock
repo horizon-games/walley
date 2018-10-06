@@ -222,6 +222,10 @@
     "@webassemblyjs/wast-parser" "1.7.8"
     "@xtuc/long" "4.2.1"
 
+"@webwallet/provider@link:../provider":
+  version "0.0.0"
+  uid ""
+
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@xtuc/ieee754/-/ieee754-1.2.0.tgz#eef014a3145ae477a1cbc00cd1e552336dceb790"
