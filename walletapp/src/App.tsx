@@ -37,7 +37,6 @@ class App extends React.Component<AppProps> {
 
 const Viewport = styled.div`
   height: 100%;
-  padding: 20px;
 `
 
 injectGlobal`
