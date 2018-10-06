@@ -9,7 +9,7 @@ const express = require('express')
 
 const main = [
   'react-hot-loader/patch',
-  'webpack-dev-server/client?http://0.0.0.0:3000',
+  'webpack-dev-server/client?http://0.0.0.0:4000',
   'webpack/hot/only-dev-server',
   'whatwg-fetch',
   './src/index.tsx'
@@ -80,7 +80,7 @@ module.exports = {
   devtool: 'inline-source-map',
   devServer: {
     host: '0.0.0.0',
-    port: 3000,
+    port: 4000,
     open: false,
     hot: true,
     historyApiFallback: true,

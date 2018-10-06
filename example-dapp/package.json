@@ -14,6 +14,7 @@
     "test": "jest --ci --runInBand"
   },
   "dependencies": {
+    "@webwallet/provider": "link:../provider",
     "core-js": "^2.5.3",
     "ethers": "~4.0.3",
     "global": "^4.3.2",

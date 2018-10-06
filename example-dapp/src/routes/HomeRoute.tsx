@@ -24,7 +24,7 @@ class HomeRoute extends React.Component<IHomeRouteProps, {}> {
 }
 
 const Container = styled.div`
-  color: white;
+  color: black;
   font-size: 2rem;
 `
 
