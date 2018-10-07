@@ -9,6 +9,10 @@ class WalletStore {
   @observable private decryptedWallet?: ethers.Wallet
 
   @observable public signRequest: object | null
+  @observable public sendETHRequest: object | null
+  @observable public sendETHTo: string | null
+  @observable public sendETHValue: string | null
+  @observable public sendETHGas: string | null
 
   @observable public okCancel: boolean | null
 
@@ -31,7 +35,7 @@ class WalletStore {
     }
 
     const privateKey = '0xb0057716d5917badaf911b193b12b910811c1497b5bada8d7711f758981c3773'
-    const provider = new ethers.providers.JsonRpcProvider()
+    const provider = new ethers.providers.JsonRpcProvider('http://localhost:8545')
     this.decryptedWallet = new ethers.Wallet(privateKey, provider)
     this.account = this.decryptedWallet.address
 
@@ -79,17 +83,19 @@ class WalletStore {
           throw Error(`no account ${params[0]}`)
         }
 
-        this.signRequest = request
-        const proceed = await this.waitForUserInput()
-        this.okCancel = null
+        {
+          this.signRequest = request
+          const confirm = await this.waitForUserInput()
+          this.okCancel = null
 
-        if (proceed) {
-          const sig = await this.signMessage(ethers.utils.toUtf8String(params[1]))
-          response.result = sig
-        } else {
-          // cancelled by user..
-          this.signRequest = null
-          throw new Error(`cancelled by user`)
+          if (confirm) {
+            const sig = await this.signMessage(ethers.utils.toUtf8String(params[1]))
+            response.result = sig
+          } else {
+            // cancelled by user..
+            this.signRequest = null
+            throw new Error(`cancelled by user`)
+          }
         }
         break
 
@@ -98,10 +104,33 @@ class WalletStore {
         break
 
       case 'eth_sendTransaction':
-        response.result = (await this.decryptedWallet!.sendTransaction(params[0])).hash
+        console.log('=> eth_sendTransaction', params[0])
+
+        {
+          this.sendETHRequest = request
+          const confirm = await this.waitForUserInput()
+          this.okCancel = null
+          this.sendETHRequest = null
+
+          if (confirm) {
+            params[0].to = this.sendETHTo
+            params[0].value = this.sendETHValue
+            params[0].gas = this.sendETHGas
+
+            response.result = (await this.decryptedWallet!.sendTransaction(params[0])).hash
+
+            this.sendETHTo = null
+            this.sendETHValue = null
+            this.sendETHGas = null
+          } else {
+            // cancelled by user
+            throw new Error(`cancelled by user`)
+          }
+        }
         break
 
       case 'eth_getTransactionByHash':
+        console.log('=> eth_sendTransactionByHash', params[0])
         response.result = await this.decryptedWallet!.provider.getTransaction(params[0])
         break
 

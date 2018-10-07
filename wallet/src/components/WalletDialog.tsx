@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { observer, inject } from 'mobx-react'
 import WalletStore from '~/stores/WalletStore'
 import SignDialog from './SignDialog'
+import TransactionDialog from './TransactionDialog'
 import * as ethers from 'ethers'
 
 export interface IWalletDialogProps {
@@ -15,19 +16,19 @@ export default class WalletDialog extends React.Component<IWalletDialogProps, {}
   render() {
     const walletStore = this.props.walletStore!
 
-    const visible = !!walletStore.signRequest
+    const visible = !!walletStore.signRequest || !!walletStore.sendETHRequest
 
     return (
       <Container visible={visible}>
         { walletStore.signRequest && <SignDialog /> }
+        { walletStore.sendETHRequest && <TransactionDialog /> }
       </Container>
     )
   }
 }
 
-const dialogWidth = 320
+const dialogWidth = 360
 const dialogHeight = 400
-
 
 const Container = styled.div<{ visible: boolean }>`
   opacity: ${props => props.visible ? 1.0 : 0};

@@ -4,7 +4,6 @@ import { withRouter } from 'mobx-little-router-react'
 import styled from 'styled-components'
 import WalletStore from '~/stores/WalletStore'
 import * as ethers from 'ethers'
-// import layout from '~/utils/layout'
 
 export interface IIndexRouteProps {
   className: string
@@ -31,6 +30,14 @@ class IndexRoute extends React.Component<IIndexRouteProps, { log: string }> {
     const address = await walletStore.signer.getAddress()
     console.log('=>', address)
     this.appendLog(address)
+  }
+
+  getBalance = async () => {
+    const { walletStore } = this.props
+    console.log('getBalance:')
+    const balance = await walletStore.signer.getBalance()
+    console.log('=>', balance)
+    this.appendLog(balance.toString())
   }
 
   signMessage = async () => {
@@ -65,8 +72,8 @@ class IndexRoute extends React.Component<IIndexRouteProps, { log: string }> {
     }
 
     const resp = await walletStore.signer.sendTransaction(rtx)
-
-    this.appendLog('TODO: .. log the send tx resp')
+    console.log('tx resp:', resp)
+    this.appendLog(`tx.hash: ${resp.hash}`)
   }
 
   render() {
@@ -79,9 +86,14 @@ class IndexRoute extends React.Component<IIndexRouteProps, { log: string }> {
           <button type="button" onClick={this.getAddress}>Get Address</button>
         </fieldset>
 
+        <fieldset className={'getBalance'}>
+          <legend>Get ETH Balance</legend>
+          <button type="button" onClick={this.getBalance}>Get ETH Balance</button>
+        </fieldset>
+
         <fieldset className={'signMessage'}>
           <legend>Signing a Message</legend>
-          <input ref={ref => this.signMessageInput = ref} type="text" />
+          <input ref={ref => this.signMessageInput = ref} type="text" defaultValue={'Sign Me!'} />
           <button type="button" onClick={this.signMessage}>Sign Message</button>
         </fieldset>
 

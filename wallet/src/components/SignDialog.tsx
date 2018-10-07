@@ -40,6 +40,9 @@ const Container = styled.div`
   background-color: #999;
   border: 2px solid black;
   border-top: 0;
+  border-radius: 0 0 20px 20px;
+
+  box-shadow: 0 2px 16px rgba(0,0,0,0.4);
 
   padding: 20px;
 `
@@ -62,8 +65,9 @@ const Message = styled.div`
   .message {
     color: black;
     font-size: 2rem;
-    text-align: center;
+    text-align: left;
     width: 100%;
+    background-color: #CCC;
 
     border-top: 1px solid black;
     border-bottom: 1px solid black;
