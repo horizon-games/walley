@@ -7,7 +7,7 @@ import DAppFrame from '~/components/DAppFrame'
 import SignDialog from '~/components/SignDialog'
 // import layout from '~/utils/layout'
 
-export interface IHomeRouteProps {
+export interface IIndexRouteProps {
   className: string
   router: any
   walletStore: WalletStore
@@ -15,7 +15,7 @@ export interface IHomeRouteProps {
 
 @inject('walletStore')
 @observer
-class HomeRoute extends React.Component<IHomeRouteProps, {}> {
+class IndexRoute extends React.Component<IIndexRouteProps, {}> {
   // getAddress = async () => {
   //   const wallet = this.props.walletStore.wallet
   //   const address = await wallet.ethWallet.getAddress()
@@ -68,4 +68,4 @@ const DAppContainer = styled.div`
   background-color: #111;
 `
 
-export default withRouter(HomeRoute)
+export default withRouter(IndexRoute)

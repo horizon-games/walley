@@ -4,12 +4,12 @@ import { withRouter } from 'mobx-little-router-react'
 import styled from 'styled-components'
 // import layout from '~/utils/layout'
 
-export interface IHomeRouteProps {
+export interface IIndexRouteProps {
   className: string
   router: any
 }
 
-class HomeRoute extends React.Component<IHomeRouteProps, {}> {
+class IndexRoute extends React.Component<IIndexRouteProps, {}> {
   getAddress = async () => {
     console.log('getAddress:, TODO')
   }
@@ -34,4 +34,4 @@ const Container = styled.div`
   font-size: 2rem;
 `
 
-export default withRouter(HomeRoute)
+export default withRouter(IndexRoute)

@@ -1,6 +1,6 @@
 
-import HomeRoute from './HomeRoute'
+import IndexRoute from '~/routes/IndexRoute'
 
 export default <any>[
-  { path: '', component: HomeRoute }  
+  { path: '', component: IndexRoute }  
 ]
