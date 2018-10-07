@@ -80,4 +80,6 @@ router.start(async () => {
   const signer = web3Provider.getSigner()
 
   console.log('example,', web3)
+
+  signer.signMessage('hello')
 })

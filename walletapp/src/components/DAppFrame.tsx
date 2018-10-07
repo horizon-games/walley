@@ -37,6 +37,10 @@ export default class DAppFrame extends React.Component<IDAppFrameProps, {}> {
     case 'net_version':
       response.result = '1'
       break
+
+    default:
+      console.log(request)
+      break
     }
 
     const message = JSON.stringify({ serial, response })
