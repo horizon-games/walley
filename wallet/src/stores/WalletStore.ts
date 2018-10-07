@@ -105,6 +105,10 @@ class WalletStore {
         response.result = await this.decryptedWallet!.provider.getTransaction(params[0])
         break
 
+      case 'eth_blockNumber':
+        response.result = `${await this.decryptedWallet!.provider.getBlockNumber()}`
+        break
+
       default:
         console.log(request)
         break
