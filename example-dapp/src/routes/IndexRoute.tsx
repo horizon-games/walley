@@ -2,24 +2,30 @@ import * as React from 'react'
 import { observer, inject } from 'mobx-react'
 import { withRouter } from 'mobx-little-router-react'
 import styled from 'styled-components'
+import WalletStore from '~/stores/WalletStore'
 // import layout from '~/utils/layout'
 
 export interface IIndexRouteProps {
   className: string
   router: any
+  walletStore: WalletStore
 }
 
+@inject('walletStore')
+@observer
 class IndexRoute extends React.Component<IIndexRouteProps, {}> {
-  componentDidMount() {
-    console.log('example: mounted indexroute')
-  }
-
   getAddress = async () => {
-    console.log('getAddress:, TODO')
+    const { walletStore } = this.props
+    console.log('getAddress:')
+    const address = await walletStore.signer.getAddress()
+    console.log('=>', address)
   }
 
   signMessage = async () => {
-    console.log('sign a message, TODO')
+    const { walletStore } = this.props
+    console.log('signMessage(hello):')
+    const sig = await walletStore.signer.signMessage('hello')
+    console.log('=>', sig)
   }
 
   render() {
