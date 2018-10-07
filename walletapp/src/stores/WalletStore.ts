@@ -37,8 +37,8 @@ class WalletStore {
 
   private async encryptWallet(password) {
     if (this.account && this.decryptedWallet) {
-      this.encryptedWallet = await this.decryptedWallet.encrypt(password, undefined, () => {
-        console.log('encrypting..')
+      this.encryptedWallet = await this.decryptedWallet.encrypt(password, undefined, (progress) => {
+        console.log(`encrypting... ${progress}`)
       })
 
       window.localStorage.setItem('account', this.account)
@@ -49,7 +49,9 @@ class WalletStore {
   private async decryptWallet(password) {
     if (this.encryptedWallet) {
       // @ts-ignore: https://github.com/ethers-io/ethers.js/pull/293
-      this.decryptedWallet = ethers.Wallet.fromEncryptedJson(this.encryptedWallet, password)
+      this.decryptedWallet = await ethers.Wallet.fromEncryptedJson(this.encryptedWallet, password, (progress) => {
+        console.log(`decrypting... ${progress}`)
+      })
     }
   }
 
@@ -68,8 +70,12 @@ class WalletStore {
         break
 
       case 'eth_sign':
+        if (params[0].toLowerCase() !== this.account!.toLowerCase()) {
+          throw Error(`no account ${params[0]}`)
+        }
+
         this.signRequest = request
-        const sig = await this.getSignature()
+        const sig = await this.signMessage(ethers.utils.toUtf8String(params[1]))
         response.result = sig
         break
   
@@ -81,11 +87,10 @@ class WalletStore {
     return response
   }
 
-  async getSignature(): Promise<string> {
+  async signMessage(message: string): Promise<string> {
     this.signRequest = null
-    return 'woooooohoooo'
+    return this.decryptedWallet!.signMessage(message)
   }
-
 }
 
 export default WalletStore
