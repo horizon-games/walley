@@ -37,9 +37,7 @@ class WalletStore {
 
   private async encryptWallet(password) {
     if (this.account && this.decryptedWallet) {
-      this.encryptedWallet = await this.decryptedWallet.encrypt(password, undefined, (progress) => {
-        console.log(`encrypting... ${progress}`)
-      })
+      this.encryptedWallet = this.decryptedWallet.mnemonic
 
       window.localStorage.setItem('account', this.account)
       window.localStorage.setItem('encryptedWallet', this.encryptedWallet)
@@ -48,10 +46,7 @@ class WalletStore {
 
   private async decryptWallet(password) {
     if (this.encryptedWallet) {
-      // @ts-ignore: https://github.com/ethers-io/ethers.js/pull/293
-      this.decryptedWallet = await ethers.Wallet.fromEncryptedJson(this.encryptedWallet, password, (progress) => {
-        console.log(`decrypting... ${progress}`)
-      })
+      this.decryptedWallet = ethers.Wallet.fromMnemonic(this.encryptedWallet)
     }
   }
 
