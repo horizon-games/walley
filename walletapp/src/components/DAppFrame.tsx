@@ -37,24 +37,9 @@ export default class DAppFrame extends React.Component<IDAppFrameProps, {}> {
     })
   }
 
-  onJsonRpcRequest({ serial, request }: { serial: number, request: any }) {
-    const { jsonrpc, id, method, params } = request
-    const response: any = { jsonrpc, id }
-
-    switch (method) {
-    case 'net_version':
-      response.result = '1'
-      break
-
-    case 'eth_accounts':
-      response.result = [this.props.walletStore!.account]
-      break
-
-    default:
-      console.log(request)
-      break
-    }
-
+  async onJsonRpcRequest({ serial, request }: { serial: number, request: any }) {
+    const { walletStore } = this.props
+    const response = await walletStore!.onJsonRpcRequest({ serial, request })
 
     const message = JSON.stringify({ serial, response })
     this.iframeRef.contentWindow!.postMessage(message, this.props.appURL)

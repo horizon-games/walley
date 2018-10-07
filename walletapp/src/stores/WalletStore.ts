@@ -8,6 +8,8 @@ class WalletStore {
   @observable private encryptedWallet?: string
   @observable private decryptedWallet?: ethers.Wallet
 
+  @observable public signRequest: object | null
+
   constructor() {
   }
 
@@ -49,6 +51,39 @@ class WalletStore {
       // @ts-ignore: https://github.com/ethers-io/ethers.js/pull/293
       this.decryptedWallet = ethers.Wallet.fromEncryptedJson(this.encryptedWallet, password)
     }
+  }
+
+  async onJsonRpcRequest({ serial, request }: { serial: number, request: any }): Promise<object> {
+    const { jsonrpc, id, method, params } = request
+
+    const response: any = { jsonrpc, id }
+
+    switch (method) {
+      case 'net_version':
+        response.result = '1'
+        break
+  
+      case 'eth_accounts':
+        response.result = [this.account]
+        break
+
+      case 'eth_sign':
+        this.signRequest = request
+        const sig = await this.getSignature()
+        response.result = sig
+        break
+  
+      default:
+        console.log(request)
+        break
+    }
+
+    return response
+  }
+
+  async getSignature(): Promise<string> {
+    this.signRequest = null
+    return 'woooooohoooo'
   }
 
 }

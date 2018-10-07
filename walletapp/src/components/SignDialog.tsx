@@ -4,18 +4,20 @@ import { observer, inject } from 'mobx-react'
 import WalletStore from '~/stores/WalletStore'
 
 export interface ISignDialogProps {
-  walletStore: WalletStore
+  walletStore?: WalletStore
 }
 
 @inject('walletStore')
 @observer
-export default class SignDialog extends React.Component<{}, {}> {
+export default class SignDialog extends React.Component<ISignDialogProps, {}> {
 
   render() {
-    // const { walletStore } = this.props
+    const { walletStore } = this.props
+
+    const visible = walletStore!.signRequest === null
 
     return (
-      <Container visible={true}>
+      <Container visible={visible}>
         <Dialog>
           hi.!
         </Dialog>
