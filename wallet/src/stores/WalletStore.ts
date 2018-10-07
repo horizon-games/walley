@@ -109,6 +109,10 @@ class WalletStore {
         response.result = `${await this.decryptedWallet!.provider.getBlockNumber()}`
         break
 
+      case 'eth_getBalance':
+        response.result = (await this.decryptedWallet!.provider.getBalance(params[0])).toHexString()
+        break
+
       default:
         console.log(request)
         break
