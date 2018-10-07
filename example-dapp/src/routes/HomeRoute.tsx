@@ -9,15 +9,21 @@ export interface IHomeRouteProps {
   router: any
 }
 
-// @observer
 class HomeRoute extends React.Component<IHomeRouteProps, {}> {
-  componentDidMount() {
+  getAddress = async () => {
+    console.log('getAddress:, TODO')
+  }
+
+  signMessage = async () => {
+    console.log('sign a message, TODO')
   }
 
   render() {
     return (
       <Container>
-        DAPP example... mmmmhmmm
+        DAPP example... mmmmhmmm<br /><br />
+        <button type="button" onClick={this.getAddress}>Get Address</button><br />
+        <button type="button" onClick={this.signMessage}>Sign Message</button><br />
       </Container>
     )
   }

@@ -1,3 +1,2 @@
-Ethereum Web Wallet
-===================
-
+Walley :D
+=========

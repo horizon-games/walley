@@ -16,32 +16,23 @@ export interface IHomeRouteProps {
 @inject('walletStore')
 @observer
 class HomeRoute extends React.Component<IHomeRouteProps, {}> {
-  componentDidMount() {
-  }
+  // getAddress = async () => {
+  //   const wallet = this.props.walletStore.wallet
+  //   const address = await wallet.ethWallet.getAddress()
 
-  getAddress = async () => {
-    const wallet = this.props.walletStore.wallet
-    const address = await wallet.ethWallet.getAddress()
+  //   console.log('getAddress:', address)
+  // }
 
-    console.log('getAddress:', address)
-  }
-
-  signMessage = async () => {
-    console.log('sign a message')
-  }
+  // signMessage = async () => {
+  //   console.log('sign a message')
+  // }
 
   render() {
     return (
       <Container>
         <WalletHeader>
           <div>walley</div>
-          <div>
-            <button type="button" onClick={this.getAddress}>Get Address</button>
-            <button type="button" onClick={this.signMessage}>Sign Message</button>
-          </div>
-          <div>
-            <SignDialog />
-          </div>
+          <SignDialog />
         </WalletHeader>
         <DAppContainer>
           <DAppFrame appURL={'http://localhost:4000/'} />
@@ -70,10 +61,6 @@ const WalletHeader = styled.div`
 
   display: flex;
   flex-wrap: nowrap;
-
-  button {
-    margin-left: 10px;
-  }
 `
 
 const DAppContainer = styled.div`

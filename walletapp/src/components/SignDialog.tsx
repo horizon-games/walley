@@ -6,19 +6,25 @@ export default class SignDialog extends React.Component<{}, {}> {
   render() {
     return (
       <Container>
-        hi
+        <Dialog>hi.!</Dialog>
       </Container>
     )
   }
 }
 
+const dialogWidth = 400
+
 const Container = styled.div`
-  display: none;
-  position: absolute;
+  position: fixed;
   top: 0;
-  left: 250px;
-  width: 400px;
+  left: 50%;
+  width: ${dialogWidth}px;
   height: 600px;
+  margin-left: -${dialogWidth/2}px;
+
   background-color: blue;
   opacity: 0.5;
+`
+
+const Dialog = styled.div`
 `
