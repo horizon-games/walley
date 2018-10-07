@@ -10,35 +10,9 @@ export interface ISignDialogProps {
 @inject('walletStore')
 @observer
 export default class SignDialog extends React.Component<ISignDialogProps, {}> {
-
   render() {
-    const { walletStore } = this.props
-
-    const visible = walletStore!.signRequest === null
-
     return (
-      <Container visible={visible}>
-        <Dialog>
-          hi.!
-        </Dialog>
-      </Container>
+      <div>word.</div>
     )
   }
 }
-
-const dialogWidth = 400
-
-const Container = styled.div<{ visible: boolean }>`
-  opacity: ${props => props.visible ? 0.9 : 0};
-  position: fixed;
-  top: 0;
-  left: 50%;
-  width: ${dialogWidth}px;
-  height: 600px;
-  margin-left: -${dialogWidth/2}px;
-
-  background-color: blue;
-`
-
-const Dialog = styled.div`
-`

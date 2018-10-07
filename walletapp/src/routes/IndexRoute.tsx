@@ -4,7 +4,7 @@ import { withRouter } from 'mobx-little-router-react'
 import styled from 'styled-components'
 import WalletStore from '~/stores/WalletStore'
 import DAppFrame from '~/components/DAppFrame'
-import SignDialog from '~/components/SignDialog'
+import WalletDialog from '~/components/WalletDialog'
 // import layout from '~/utils/layout'
 
 export interface IIndexRouteProps {
@@ -21,7 +21,7 @@ class IndexRoute extends React.Component<IIndexRouteProps, {}> {
       <Container>
         <WalletHeader>
           <div>walley</div>
-          <SignDialog />
+          <WalletDialog />
         </WalletHeader>
         <DAppContainer>
           <DAppFrame appURL={'http://localhost:4000/'} />
