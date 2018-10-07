@@ -37,4 +37,5 @@ const Container = styled.div<{ visible: boolean }>`
   width: ${dialogWidth}px;
   height: ${dialogHeight}px;
   margin-left: -${dialogWidth/2}px;
+  pointer-events: ${props => props.visible ? 'auto' : 'none'};
 `

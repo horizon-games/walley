@@ -42,7 +42,7 @@ const Container = styled.div`
 const WalletHeader = styled.div`
   width: 100%;
   height: 54px;
-  background-color: #0c061e;
+  background-color: #25183b;
   border-bottom: 1px solid rgba(255,255,255,0.5);
 
   padding-left: 20px;

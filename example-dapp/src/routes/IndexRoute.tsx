@@ -14,37 +14,48 @@ export interface IIndexRouteProps {
 
 @inject('walletStore')
 @observer
-class IndexRoute extends React.Component<IIndexRouteProps, {}> {
-  ethSendAmountRef: HTMLInputElement | null
-  ethSendAddressRef: HTMLInputElement | null
+class IndexRoute extends React.Component<IIndexRouteProps, { log: string }> {
+  sendETHAddressInput: HTMLInputElement | null
+  sendETHAmountInput: HTMLInputElement | null
+  signMessageInput: HTMLInputElement | null
+
+  state = { log: '' }
+
+  appendLog(m: string) {
+    this.setState({ log: `${m}<br />\n${this.state.log}` })
+  }
 
   getAddress = async () => {
     const { walletStore } = this.props
     console.log('getAddress:')
     const address = await walletStore.signer.getAddress()
     console.log('=>', address)
+    this.appendLog(address)
   }
 
   signMessage = async () => {
     const { walletStore } = this.props
     console.log('signMessage(hello):')
-    const sig = await walletStore.signer.signMessage('hello')
+    const sig = await walletStore.signer.signMessage(this.signMessageInput!.value)
     console.log('=>', sig)
+    this.appendLog(sig)
   }
 
   sendETH = async () => {
     const { walletStore } = this.props
     console.log('sendEth:')
 
-    const amount = this.ethSendAmountRef!.value
-    const sendTo = this.ethSendAddressRef!.value
+    const amount = this.sendETHAmountInput!.value
+    const sendTo = this.sendETHAddressInput!.value
 
     if (amount === '') {
       console.log('Amount invalid.')
+      this.appendLog('ERR: Amount invalid.')
       return
     }
     if (sendTo === '' || !sendTo.startsWith('0x')) {
       console.log('SendTo Address invalid.')
+      this.appendLog('ERR: SendTo Address invalid.')      
       return
     }
 
@@ -54,19 +65,38 @@ class IndexRoute extends React.Component<IIndexRouteProps, {}> {
     }
 
     const resp = await walletStore.signer.sendTransaction(rtx)
+
+    this.appendLog('TODO: .. log the send tx resp')
   }
 
   render() {
     return (
       <Container>
-        DAPP example... mmmmhmmm<br /><br />
-        <button type="button" onClick={this.getAddress}>Get Address</button><br />
-        <button type="button" onClick={this.signMessage}>Sign Message</button><br />
-        <div>
+        <h1>DAPP example</h1>
+
+        <fieldset className={'getAddress'}>
+          <legend>Get Wallet Address</legend>
+          <button type="button" onClick={this.getAddress}>Get Address</button>
+        </fieldset>
+
+        <fieldset className={'signMessage'}>
+          <legend>Signing a Message</legend>
+          <input ref={ref => this.signMessageInput = ref} type="text" />
+          <button type="button" onClick={this.signMessage}>Sign Message</button>
+        </fieldset>
+
+        <fieldset className={'sendETH'}>
+          <legend>Send ETH</legend>
+          <input className={'ethAmount'} ref={ref => this.sendETHAmountInput = ref} type="text" defaultValue={'0.1'} placeholder="ETH amount" /> to
+          <input className={'toAddress'} ref={ref => this.sendETHAddressInput = ref} type="text" defaultValue={'0x4b25350d7c0224a68ea0c72855bfd035d8fa09d3'} placeholder="Address" />
           <button type="button" onClick={this.sendETH}>Send ETH</button>
-          <input ref={ref => this.ethSendAmountRef = ref} type="text" defaultValue={'0.1'} placeholder="ETH amount" /> to
-          <input ref={ref => this.ethSendAddressRef = ref} type="text" defaultValue={'0x4b25350d7c0224a68ea0c72855bfd035d8fa09d3'} placeholder="Address" />
-          <br />
+        </fieldset>
+
+        <div className={'debug'}>
+          <b>Log:</b>
+          <div className={'log'}>
+            <span dangerouslySetInnerHTML={{__html: this.state.log}} />
+          </div>
         </div>
       </Container>
     )
@@ -74,8 +104,51 @@ class IndexRoute extends React.Component<IIndexRouteProps, {}> {
 }
 
 const Container = styled.div`
+  padding: 40px;
   color: black;
   font-size: 2rem;
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    padding-bottom: 20px;
+  }
+
+  fieldset {
+    display: block;
+    margin-left: 2px;
+    margin-right: 2px;
+    padding-top: 0.35em;
+    padding-bottom: 0.625em;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+    border: 2px groove #333;
+    margin-top: 20px;
+  }
+
+  .signMessage input {
+    width: 300px;
+  }
+
+  .ethAmount {
+    width: 50px;
+  }
+
+  .toAddress {
+    width: 350px;
+  }
+
+  .debug {
+    margin-top: 100px;
+  }
+
+  .log {
+    height: 200px;
+    overflow: scroll;
+    border: 1px solid black;
+    font-size: 1.5rem;
+    line-height: 18px;
+  }
 `
 
 export default withRouter(IndexRoute)
