@@ -1,17 +1,24 @@
 import * as ethers from 'ethers'
 import * as React from 'react'
 import styled from 'styled-components'
-import { observer } from 'mobx-react'
+import { observer, inject } from 'mobx-react'
+import WalletStore from '~/stores/WalletStore'
 
 export interface IDAppFrameProps {
+  walletStore?: WalletStore
   appURL: string
 }
 
+@inject('walletStore')
 @observer
 export default class DAppFrame extends React.Component<IDAppFrameProps, {}> {
   iframeRef: HTMLIFrameElement
 
-  componentDidMount() {
+  async componentDidMount() {
+    const { walletStore } = this.props
+
+    await walletStore!.getAddress()
+
     this.iframeRef.addEventListener('load', (event: UIEvent) => {
       const { appURL } = this.props
 
@@ -20,7 +27,7 @@ export default class DAppFrame extends React.Component<IDAppFrameProps, {}> {
         const appOrigin = (new URL(appURL)).origin
 
         if (eventOrigin === appOrigin) {
-          this.onJsonRpc(JSON.parse(event.data))
+          this.onJsonRpcRequest(JSON.parse(event.data))
         }
       })
 
@@ -30,7 +37,7 @@ export default class DAppFrame extends React.Component<IDAppFrameProps, {}> {
     })
   }
 
-  onJsonRpc({ serial, request }: { serial: number, request: any }) {
+  onJsonRpcRequest({ serial, request }: { serial: number, request: any }) {
     const { jsonrpc, id, method, params } = request
     const response: any = { jsonrpc, id }
 
@@ -40,13 +47,14 @@ export default class DAppFrame extends React.Component<IDAppFrameProps, {}> {
       break
 
     case 'eth_accounts':
-      response.result = [this.account]
+      response.result = [this.props.walletStore!.account]
       break
 
     default:
       console.log(request)
       break
     }
+
 
     const message = JSON.stringify({ serial, response })
     this.iframeRef.contentWindow!.postMessage(message, this.props.appURL)
@@ -60,54 +68,6 @@ export default class DAppFrame extends React.Component<IDAppFrameProps, {}> {
         <iframe ref={ref => this.iframeRef = ref!} src={appURL} />
       </Container>
     )
-  }
-
-  private get account() {
-    this.getWallet()
-
-    return this._account
-  }
-
-  private async encryptWallet(password) {
-    this.getWallet()
-
-    if (this._account && this._decryptedWallet) {
-      this._encryptedWallet = await this._decryptedWallet.encrypt(password)
-
-      window.localStorage.setItem('account', this._account)
-      window.localStorage.setItem('encryptedWallet', this._encryptedWallet)
-    }
-  }
-
-  private async decryptWallet(password) {
-    this.getWallet()
-
-    if (this._encryptedWallet) {
-      // @ts-ignore: https://github.com/ethers-io/ethers.js/pull/293
-      this._decryptedWallet = ethers.Wallet.fromEncryptedJson(this._encryptedWallet, password)
-    }
-  }
-
-  private _account?: string
-  private _encryptedWallet?: string
-  private _decryptedWallet?: ethers.Wallet
-
-  private getWallet() {
-    if (this._account) {
-      return
-    }
-
-    const account = window.localStorage.getItem('account')
-    const encryptedWallet = window.localStorage.getItem('encryptedWallet')
-
-    if (account && encryptedWallet) {
-      this._account = account
-      this._encryptedWallet = encryptedWallet
-      return
-    }
-
-    this._decryptedWallet = ethers.Wallet.createRandom()
-    this._account = this._decryptedWallet.address
   }
 }
 

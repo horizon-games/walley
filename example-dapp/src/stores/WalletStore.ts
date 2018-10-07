@@ -2,7 +2,6 @@ import { observable } from 'mobx'
 import * as ethers from 'ethers'
 
 class WalletStore {
-  // @observable public wallet: Wallet
   public provider: ethers.providers.Web3Provider
   public signer: ethers.providers.JsonRpcSigner
 

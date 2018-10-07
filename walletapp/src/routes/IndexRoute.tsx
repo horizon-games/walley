@@ -16,17 +16,6 @@ export interface IIndexRouteProps {
 @inject('walletStore')
 @observer
 class IndexRoute extends React.Component<IIndexRouteProps, {}> {
-  // getAddress = async () => {
-  //   const wallet = this.props.walletStore.wallet
-  //   const address = await wallet.ethWallet.getAddress()
-
-  //   console.log('getAddress:', address)
-  // }
-
-  // signMessage = async () => {
-  //   console.log('sign a message')
-  // }
-
   render() {
     return (
       <Container>
