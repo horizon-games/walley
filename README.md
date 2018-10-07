@@ -1,7 +1,7 @@
 Walley :D
 =========
 
-by William Hua (@attente) and Peter Kieltyka (@pkieltyka)
+by William Hua [@attente](https://github.com/attente) and Peter Kieltyka [@pkieltyka](https://github.com/pkieltyka) in 1 day during ETHSF. Built on the amazing [ethers.js](https://github.com/ethers-io/ethers.js) library by [Richard Moore](https://github.com/ricmoo).
 
 # Usage
 
