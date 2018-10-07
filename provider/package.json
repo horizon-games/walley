@@ -24,7 +24,6 @@
     "coverage": "jest --coverage"
   },
   "dependencies": {
-    "ethers": "~4.0.3"
   },
   "devDependencies": {
     "@types/jest": "^23.3.2",
