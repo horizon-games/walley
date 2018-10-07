@@ -1,14 +1,16 @@
 Walley :D
 =========
 
+by William Hua (@attente) and Peter Kieltyka (@pkieltyka)
+
 # Usage
 
 1. `cd provider/ && yarn && yarn dist`
 2. `cd example-dapp/ && yarn; yarn dev` -- keep this running in some window
 3. `cd wallet/ && yarn; yarn dev` -- keep this running in another window
 4. `cd ganache/ && yarn && yarn ganache-cli -d -v` -- keep this running in another window
-4. Open browser to http://localhost:3000/
-5. Open your console too to see stuff
+5. Open browser to http://localhost:3000/
+6. Open your console to see stuff
 
 # License
 
