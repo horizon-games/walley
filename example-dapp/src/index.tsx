@@ -1,4 +1,5 @@
-import '@webwallet/provider'
+import * as provider from '@webwallet/provider'
+import * as ethers from 'ethers'
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import * as mobx from 'mobx'
@@ -62,9 +63,13 @@ function getGroupColor(ev) {
   (window as any).router = router
 }
 
-router.start(() => {
+router.start(async () => {
   ReactDOM.render(
     <App router={router} stores={stores} />,
     document.getElementById('app')
   )
+
+  const web3 = await provider.waitForWeb3
+  const web3Provider = new ethers.providers.Web3Provider(web3.currentProvider)
+  const signer = web3Provider.getSigner()
 })
