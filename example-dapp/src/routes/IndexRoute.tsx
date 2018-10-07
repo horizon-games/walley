@@ -64,8 +64,8 @@ class IndexRoute extends React.Component<IIndexRouteProps, {}> {
         <button type="button" onClick={this.signMessage}>Sign Message</button><br />
         <div>
           <button type="button" onClick={this.sendETH}>Send ETH</button>
-          <input ref={ref => this.ethSendAmountRef = ref} type="text" value={'0.1'} placeholder="ETH amount" /> to
-          <input ref={ref => this.ethSendAddressRef = ref} type="text" value={'0x4b25350d7c0224a68ea0c72855bfd035d8fa09d3'} placeholder="Address" />
+          <input ref={ref => this.ethSendAmountRef = ref} type="text" defaultValue={'0.1'} placeholder="ETH amount" /> to
+          <input ref={ref => this.ethSendAddressRef = ref} type="text" defaultValue={'0x4b25350d7c0224a68ea0c72855bfd035d8fa09d3'} placeholder="Address" />
           <br />
         </div>
       </Container>
