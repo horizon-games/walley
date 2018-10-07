@@ -19,7 +19,7 @@ export default class DAppFrame extends React.Component<IDAppFrameProps, {}> {
         const appOrigin = (new URL(appURL)).origin
 
         if (eventOrigin === appOrigin) {
-          const message = JSON.parse(event.data)
+          this.onJsonRpc(JSON.parse(event.data))
         }
       })
 
@@ -27,6 +27,20 @@ export default class DAppFrame extends React.Component<IDAppFrameProps, {}> {
         this.iframeRef.contentWindow!.postMessage('start web wallet', appURL)
       }
     })
+  }
+
+  onJsonRpc({ serial, request }: { serial: number, request: any }) {
+    const { jsonrpc, id, method, params } = request
+    const response: any = { jsonrpc, id }
+
+    switch (method) {
+    case 'net_version':
+      response.result = '1'
+      break
+    }
+
+    const message = JSON.stringify({ serial, response })
+    this.iframeRef.contentWindow!.postMessage(message, this.props.appURL)
   }
 
   render() {
