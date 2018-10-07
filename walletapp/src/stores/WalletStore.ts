@@ -73,6 +73,10 @@ class WalletStore {
         const sig = await this.signMessage(ethers.utils.toUtf8String(params[1]))
         response.result = sig
         break
+
+      case 'eth_estimateGas':
+        response.result = '0x5208'
+        break
   
       default:
         console.log(request)
