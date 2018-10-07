@@ -39,6 +39,10 @@ export default class DAppFrame extends React.Component<IDAppFrameProps, {}> {
       response.result = '1'
       break
 
+    case 'eth_accounts':
+      response.result = [this.account]
+      break
+
     default:
       console.log(request)
       break
