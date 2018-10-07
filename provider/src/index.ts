@@ -1,5 +1,10 @@
 const ORIGIN = 'http://localhost:3000'
 
+let waitForWeb3Resolve: (web3: Web3) => void
+export const waitForWeb3: Promise<Web3> = new Promise((resolve, _) => {
+  waitForWeb3Resolve = resolve
+})
+
 let serial = 0
 const callbacks: { [serial: number]: (error: any, response: any) => void } = {}
 
@@ -7,7 +12,9 @@ window.addEventListener('message', (event: MessageEvent) => {
   if (event.origin === ORIGIN) {
     if (event.data === 'start web wallet') {
       if (event.source instanceof Window) {
-        (window as any).web3 = new Web3(event.source)
+        const web3 = new Web3(event.source)
+        ;(window as any).web3 = web3
+        waitForWeb3Resolve(web3)
       }
     } else {
       const message = JSON.parse(event.data)
