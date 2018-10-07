@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "ganache": "ganache-cli -d -v"
+  },
   "dependencies": {
     "ganache-cli": "^6.1.8"
   }

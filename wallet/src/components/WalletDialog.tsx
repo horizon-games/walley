@@ -20,8 +20,10 @@ export default class WalletDialog extends React.Component<IWalletDialogProps, {}
 
     return (
       <Container visible={visible}>
-        { walletStore.signRequest && <SignDialog /> }
-        { walletStore.sendETHRequest && <TransactionDialog /> }
+        <Drawer visible={visible}>
+          { walletStore.signRequest && <SignDialog /> }
+          { walletStore.sendETHRequest && <TransactionDialog /> }
+        </Drawer>
       </Container>
     )
   }
@@ -33,6 +35,17 @@ const dialogHeight = 400
 const Container = styled.div<{ visible: boolean }>`
   opacity: ${props => props.visible ? 1.0 : 0};
   position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(10,10,10,0.5);
+  pointer-events: ${props => props.visible ? 'auto' : 'none'};
+`
+
+const Drawer = styled.div<{ visible: boolean }>`
+  opacity: ${props => props.visible ? 1.0 : 0};
+  position: relative;
   top: 0;
   left: 50%;
   width: ${dialogWidth}px;

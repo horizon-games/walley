@@ -62,6 +62,8 @@ const Container = styled.div`
   border-radius: 0 0 20px 20px;
 
   box-shadow: 0 2px 16px rgba(0,0,0,0.4);
+  color: white;
+  background-color: #332851;
 
   padding: 20px;
 `
@@ -70,21 +72,21 @@ const Title = styled.h1`
   text-align: center;
   font-size: 3rem;
   font-weight: bold;
-  color: black;
+  /* color: black; */
   padding-bottom: 3px;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #CCC;
 `
 
 const Tx = styled.div`
-  color: black;
+  color: white;
   font-size: 1.8rem;
   line-height: 22px;
   text-align: left;
   width: 100%;
-  background-color: #CCC;
+  background-color: #666;
 
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
+  border-top: 1px solid #CCC;
+  border-bottom: 1px solid #CCC;
 
   padding: 30px 5px;
 

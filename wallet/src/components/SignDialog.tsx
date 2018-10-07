@@ -37,12 +37,13 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
 
-  background-color: #999;
-  border: 2px solid black;
+  color: white;
+  background-color: #332851;
+  border: 2px solid white;
   border-top: 0;
   border-radius: 0 0 20px 20px;
 
-  box-shadow: 0 2px 16px rgba(0,0,0,0.4);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.2);
 
   padding: 20px;
 `
@@ -51,26 +52,26 @@ const Title = styled.h1`
   text-align: center;
   font-size: 3rem;
   font-weight: bold;
-  color: black;
+  /* color: black; */
   padding-bottom: 3px;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #CCC;
 `
 
 const Message = styled.div`
   .label {
-    color: black;
+    color: #CCC;
     padding: 20px 0;
   }
 
   .message {
-    color: black;
+    color: white;
     font-size: 2rem;
     text-align: left;
     width: 100%;
-    background-color: #CCC;
+    background-color: #666;
 
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
+    border-top: 1px solid #CCC;
+    border-bottom: 1px solid #CCC;
 
     padding: 30px 0;
   }
