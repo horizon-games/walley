@@ -1,4 +1,4 @@
-import { observable } from 'mobx'
+import { observable, when } from 'mobx'
 import * as ethers from 'ethers'
 
 const tempPassword = 'temp'
@@ -9,6 +9,8 @@ class WalletStore {
   @observable private decryptedWallet?: ethers.Wallet
 
   @observable public signRequest: object | null
+
+  @observable public okCancel: boolean | null
 
   constructor() {
   }
@@ -55,6 +57,9 @@ class WalletStore {
 
     const response: any = { jsonrpc, id }
 
+    // reset dialog..
+    this.okCancel = null
+
     switch (method) {
       case 'net_version':
         response.result = '1'
@@ -70,8 +75,17 @@ class WalletStore {
         }
 
         this.signRequest = request
-        const sig = await this.signMessage(ethers.utils.toUtf8String(params[1]))
-        response.result = sig
+        const proceed = await this.waitForUserInput()
+        this.okCancel = null
+
+        if (proceed) {
+          const sig = await this.signMessage(ethers.utils.toUtf8String(params[1]))
+          response.result = sig
+        } else {
+          // cancelled by user..
+          this.signRequest = null
+          throw new Error(`cancelled by user`)
+        }
         break
 
       case 'eth_estimateGas':
@@ -116,6 +130,12 @@ class WalletStore {
   async signMessage(message: string): Promise<string> {
     this.signRequest = null
     return this.decryptedWallet!.signMessage(message)
+  }
+
+  async waitForUserInput(): Promise<boolean> {
+    const that = this
+    await when(() => that.okCancel !== null)
+    return this.okCancel!
   }
 }
 
