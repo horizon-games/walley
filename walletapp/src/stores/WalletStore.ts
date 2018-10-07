@@ -77,6 +77,10 @@ class WalletStore {
       case 'eth_estimateGas':
         response.result = '0x5208'
         break
+
+      case 'eth_sendTransaction':
+        response.result = ethers.utils.keccak256(ethers.utils.toUtf8Bytes('dummy hash'))
+        break
   
       default:
         console.log(request)
