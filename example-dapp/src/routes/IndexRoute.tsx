@@ -79,7 +79,7 @@ class IndexRoute extends React.Component<IIndexRouteProps, { log: string }> {
   render() {
     return (
       <Container>
-        <h1>DAPP example</h1>
+        <h1>DAPP example (...running in an iframe)</h1>
 
         <fieldset className={'getAddress'}>
           <legend>Get Wallet Address</legend>
