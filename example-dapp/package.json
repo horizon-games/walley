@@ -1,6 +1,8 @@
 {
-  "name": "@webwallet/example-dapp",
+  "name": "@walley/example-dapp",
   "version": "0.1.0",
+  "description": "Walley Example DApp",
+  "repository": "https://github.com/horizon-games/walley",
   "license": "MIT",
   "scripts": {
     "start": "yarn dev",
@@ -14,7 +16,7 @@
     "test": "jest --ci --runInBand"
   },
   "dependencies": {
-    "@webwallet/provider": "link:../provider",
+    "@walley/provider": "link:../provider",
     "core-js": "^2.5.3",
     "ethers": "~4.0.3",
     "global": "^4.3.2",

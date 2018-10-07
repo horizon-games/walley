@@ -79,6 +79,10 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
+"@walley/provider@link:../provider":
+  version "0.0.0"
+  uid ""
+
 "@webassemblyjs/ast@1.7.8":
   version "1.7.8"
   resolved "https://registry.yarnpkg.com/@webassemblyjs/ast/-/ast-1.7.8.tgz#f31f480debeef957f01b623f27eabc695fa4fe8f"
@@ -221,10 +225,6 @@
     "@webassemblyjs/ast" "1.7.8"
     "@webassemblyjs/wast-parser" "1.7.8"
     "@xtuc/long" "4.2.1"
-
-"@webwallet/provider@link:../provider":
-  version "0.0.0"
-  uid ""
 
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"

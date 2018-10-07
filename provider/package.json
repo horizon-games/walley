@@ -1,8 +1,8 @@
 {
-  "name": "@webwallet/provider",
+  "name": "@walley/provider",
   "version": "0.1.0",
-  "description": "Eth Web Wallet",
-  "repository": "https://github.com/horizon-games/webwallet",
+  "description": "Walley Provider",
+  "repository": "https://github.com/horizon-games/walley",
   "license": "MIT",
   "keywords": [
     "ethereum",

@@ -1,4 +1,4 @@
-import * as provider from '@webwallet/provider'
+import * as provider from '@walley/provider'
 import * as ethers from 'ethers'
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'

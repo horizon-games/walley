@@ -1,6 +1,8 @@
 {
-  "name": "@webwallet/walletapp",
+  "name": "@walley/walletapp",
   "version": "0.1.0",
+  "description": "Walley App",
+  "repository": "https://github.com/horizon-games/walley",
   "license": "MIT",
   "scripts": {
     "start": "yarn dev",
