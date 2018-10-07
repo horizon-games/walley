@@ -70,6 +70,14 @@ router.start(async () => {
   )
 
   const web3 = await provider.waitForWeb3
+  
+  console.log('await..')
+
   const web3Provider = new ethers.providers.Web3Provider(web3.currentProvider)
+
+  console.log('yes?')
+
   const signer = web3Provider.getSigner()
+
+  console.log('example,', web3)
 })

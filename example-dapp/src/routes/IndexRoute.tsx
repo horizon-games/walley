@@ -10,6 +10,10 @@ export interface IIndexRouteProps {
 }
 
 class IndexRoute extends React.Component<IIndexRouteProps, {}> {
+  componentDidMount() {
+    console.log('example: mounted indexroute')
+  }
+
   getAddress = async () => {
     console.log('getAddress:, TODO')
   }

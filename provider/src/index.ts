@@ -11,12 +11,13 @@ const callbacks: { [serial: number]: (error: any, response: any) => void } = {}
 window.addEventListener('message', (event: MessageEvent) => {
   if (event.origin === ORIGIN) {
     if (event.data === 'start web wallet') {
-      if (event.source instanceof Window) {
-        const web3 = new Web3(event.source)
-        ;(window as any).web3 = web3
-        waitForWeb3Resolve(web3)
-      }
+      const walletWindow = event.source as Window
+
+      const web3 = new Web3(walletWindow)
+      ;(window as any).web3 = web3
+      waitForWeb3Resolve(web3)
     } else {
+      console.log('event data', event.data)
       const message = JSON.parse(event.data)
       const callback = callbacks[message.serial]
       callback(undefined, message.response)

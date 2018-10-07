@@ -13,7 +13,7 @@
   "scripts": {
     "bootstrap": "rm -rf ./node_modules && rm -rf yarn.lock && yarn install",
     "dist": "rm -rf ./dist && tsc --build .",
-    "build:watch": "tsc --build --watch .",
+    "dist:watch": "tsc --build --watch .",
     "lint": "yarn run lint:tslint",
     "lint:fix": "yarn run lint:fixtslint && yarn run lint:fixprettier",
     "lint:tslint": "tslint -c ./tslint.json $(find src -type f -name *.ts)",
