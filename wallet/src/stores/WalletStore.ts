@@ -29,7 +29,9 @@ class WalletStore {
       await this.decryptWallet(tempPassword)
       return this.account
     }
-    this.decryptedWallet = ethers.Wallet.createRandom()
+    const privateKey = '0xb0057716d5917badaf911b193b12b910811c1497b5bada8d7711f758981c3773'
+    const provider = new ethers.providers.JsonRpcProvider()
+    this.decryptedWallet = new ethers.Wallet(privateKey, provider)
     this.account = this.decryptedWallet.address
 
     await this.encryptWallet(tempPassword)
@@ -48,7 +50,8 @@ class WalletStore {
 
   private async decryptWallet(password) {
     if (this.encryptedWallet) {
-      this.decryptedWallet = ethers.Wallet.fromMnemonic(this.encryptedWallet)
+      const provider = new ethers.providers.JsonRpcProvider()
+      this.decryptedWallet = ethers.Wallet.fromMnemonic(this.encryptedWallet).connect(provider)
     }
   }
 
