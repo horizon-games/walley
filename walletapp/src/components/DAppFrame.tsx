@@ -1,3 +1,4 @@
+import * as ethers from 'ethers'
 import * as React from 'react'
 import styled from 'styled-components'
 import { observer } from 'mobx-react'
@@ -55,6 +56,54 @@ export default class DAppFrame extends React.Component<IDAppFrameProps, {}> {
         <iframe ref={ref => this.iframeRef = ref!} src={appURL} />
       </Container>
     )
+  }
+
+  private get account() {
+    this.getWallet()
+
+    return this._account
+  }
+
+  private async encryptWallet(password) {
+    this.getWallet()
+
+    if (this._account && this._decryptedWallet) {
+      this._encryptedWallet = await this._decryptedWallet.encrypt(password)
+
+      window.localStorage.setItem('account', this._account)
+      window.localStorage.setItem('encryptedWallet', this._encryptedWallet)
+    }
+  }
+
+  private async decryptWallet(password) {
+    this.getWallet()
+
+    if (this._encryptedWallet) {
+      // @ts-ignore: https://github.com/ethers-io/ethers.js/pull/293
+      this._decryptedWallet = ethers.Wallet.fromEncryptedJson(this._encryptedWallet, password)
+    }
+  }
+
+  private _account?: string
+  private _encryptedWallet?: string
+  private _decryptedWallet?: ethers.Wallet
+
+  private getWallet() {
+    if (this._account) {
+      return
+    }
+
+    const account = window.localStorage.getItem('account')
+    const encryptedWallet = window.localStorage.getItem('encryptedWallet')
+
+    if (account && encryptedWallet) {
+      this._account = account
+      this._encryptedWallet = encryptedWallet
+      return
+    }
+
+    this._decryptedWallet = ethers.Wallet.createRandom()
+    this._account = this._decryptedWallet.address
   }
 }
 
