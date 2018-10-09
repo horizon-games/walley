@@ -1,5 +1,5 @@
 {
-  "name": "@walley/provider",
+  "name": "@walley/web3-provider",
   "version": "0.1.0",
   "description": "Walley Provider",
   "repository": "https://github.com/horizon-games/walley",
@@ -8,12 +8,15 @@
     "ethereum",
     "horizongames"
   ],
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "main": "dist/lib/index.js",
+  "typings": "dist/lib/index.d.ts",
   "scripts": {
     "bootstrap": "rm -rf ./node_modules && rm -rf yarn.lock && yarn install",
-    "dist": "rm -rf ./dist && tsc --build .",
-    "dist:watch": "tsc --build --watch .",
+    "dist": "yarn dist:lib && yarn dist:umd",
+    "dist:lib": "rm -rf ./dist/lib && tsc --build .",
+    "dist:lib:watch": "tsc --build --watch .",
+    "dist:umd": "rm -rf ./dist/umd && webpack --mode production --color --config config/webpack.config.dist.js",
+    "dist:clean": "rm -rf ./dist",
     "lint": "yarn run lint:tslint",
     "lint:fix": "yarn run lint:fixtslint && yarn run lint:fixprettier",
     "lint:tslint": "tslint -c ./tslint.json $(find src -type f -name *.ts)",
@@ -26,11 +29,16 @@
   "dependencies": {
   },
   "devDependencies": {
-    "@types/jest": "^23.3.2",
+    "@types/jest": "^23.3.4",
+    "fork-ts-checker-webpack-plugin": "^0.4.3",
     "jest": "^23.6.0",
-    "ts-jest": "23.10.3",
+    "terser-webpack-plugin": "^1.1.0",
+    "ts-jest": "23.10.4",
+    "ts-loader": "^5.2.1",
     "tslint": "^5.8.0",
-    "typescript": "3.1.1"
+    "typescript": "3.1.1",
+    "webpack": "^4.16.3",
+    "webpack-cli": "^3.1.0"
   },
   "jest": {
     "preset": "ts-jest",

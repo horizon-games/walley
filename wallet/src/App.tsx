@@ -50,7 +50,6 @@ injectGlobal`
     padding: 0;
     margin: 0;
     height: 100%;
-    background-color: #0c061e;
   }
 
   .outlet, .router-transition-group, .router-transition-item {

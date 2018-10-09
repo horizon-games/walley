@@ -16,9 +16,9 @@
     "test": "jest --ci --runInBand"
   },
   "dependencies": {
-    "@walley/provider": "link:../provider",
+    "@walley/web3-provider": "link:../web3-provider",
     "core-js": "^2.5.3",
-    "ethers": "~4.0.3",
+    "ethers": "~4.0.4",
     "global": "^4.3.2",
     "history": "^4.7.2",
     "lodash": "^4.17.11",

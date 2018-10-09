@@ -32,16 +32,15 @@ class IndexRoute extends React.Component<IIndexRouteProps, {}> {
 }
 
 const Container = styled.div`
-  color: white;
   font-size: 2rem;
   width: 100%;
   height: 100%;
-  background-color: #111;
 `
 
 const WalletHeader = styled.div`
   width: 100%;
   height: 54px;
+  color: white;
   background-color: #25183b;
   border-bottom: 1px solid rgba(255,255,255,0.5);
 
@@ -54,7 +53,6 @@ const WalletHeader = styled.div`
 
 const DAppContainer = styled.div`
   height: 100%;
-  background-color: #111;
 `
 
 export default withRouter(IndexRoute)

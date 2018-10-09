@@ -1,14 +1,11 @@
 {
   "compilerOptions": {
-    "target": "es2017",
+    "target": "es5",
     "module": "commonjs",
     "moduleResolution": "node",
     "esModuleInterop": true,
 
-    "composite": true,
     "declaration": true,
-    "declarationMap": true,
-
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
     "downlevelIteration": true,
@@ -29,9 +26,9 @@
 
     "baseUrl": "./",
     "rootDir": "./src",
-    "outDir": "./dist",
+    "outDir": "./dist/lib",
 
-    "lib": ["dom", "es2017"]
+    "lib": ["es2017", "dom"]
   },
 
   "include": ["src/**/*.ts"],

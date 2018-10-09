@@ -36,6 +36,8 @@ class WalletStore {
 
     const privateKey = '0xb0057716d5917badaf911b193b12b910811c1497b5bada8d7711f758981c3773'
     const provider = new ethers.providers.JsonRpcProvider('http://localhost:8545')
+    // const provider = new ethers.providers.JsonRpcProvider('https://rinkeby.infura.io')
+
     this.decryptedWallet = new ethers.Wallet(privateKey, provider)
     this.account = this.decryptedWallet.address
 
@@ -143,7 +145,7 @@ class WalletStore {
         break
 
       default:
-        console.log(request)
+        console.warn('unknown method for request:', request)
         break
     }
 

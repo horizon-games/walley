@@ -42,7 +42,7 @@ class IndexRoute extends React.Component<IIndexRouteProps, { log: string }> {
 
   signMessage = async () => {
     const { walletStore } = this.props
-    console.log('signMessage(hello):')
+    console.log('signMessage:')
     const sig = await walletStore.signer.signMessage(this.signMessageInput!.value)
     console.log('=>', sig)
     this.appendLog(sig)

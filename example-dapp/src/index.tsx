@@ -6,7 +6,7 @@ import { install } from 'mobx-little-router-react'
 import App from './App'
 import createStores from './stores'
 import routes from './routes'
-import * as provider from '@walley/provider'
+import * as provider from '@walley/web3-provider'
 
 async function main() {
 
